@@ -7,7 +7,7 @@ local espLibrary = {
     whitelist = {}, -- insert string that is the player's name you want to whitelist (turns esp color to whitelistColor in options)
     blacklist = {}, -- insert string that is the player's name you want to blacklist (removes player from esp)
     options = {
-        enabled = true,
+        enabled = false,
         minScaleFactorX = 1,
         maxScaleFactorX = 10,
         minScaleFactorY = 1,
@@ -26,36 +26,36 @@ local espLibrary = {
         teamColor = false,
         fillColor = nil,
         whitelistColor = Color3.new(1, 0, 0),
-        names = true,
+        names = false,
         nameTransparency = 1,
         nameColor = Color3.new(1, 1, 1),
-        boxes = true,
+        boxes = false,
         boxesTransparency = 1,
-        boxesColor = Color3.new(1, 0, 0),
+        boxesColor = Color3.new(1, 1, 1),
         boxFill = false,
         boxFillTransparency = 0.5,
-        boxFillColor = Color3.new(1, 0, 0),
-        healthBars = true,
+        boxFillColor = Color3.new(1, 1, 1),
+        healthBars = false,
         healthBarsSize = 1,
         healthBarsTransparency = 1,
         healthBarsColor = Color3.new(0, 1, 0),
-        healthText = true,
+        healthText = false,
         healthTextTransparency = 1,
         healthTextSuffix = "%",
         healthTextColor = Color3.new(1, 1, 1),
-        distance = true,
+        distance = false,
         distanceTransparency = 1,
-        distanceSuffix = " Studs",
+        distanceSuffix = "m",
         distanceColor = Color3.new(1, 1, 1),
         tracers = false,
         tracerTransparency = 1,
         tracerColor = Color3.new(1, 1, 1),
         tracerOrigin = "Bottom", -- Available [Mouse, Top, Bottom]
-        chams = true,
+        chams = false,
         chamsFillColor = Color3.new(1, 0, 0),
         chamsFillTransparency = 0.5,
         chamsOutlineColor = Color3.new(),
-        chamsOutlineTransparency = 0
+        chamsOutlineTransparency = 1
     },
 };
 espLibrary.__index = espLibrary;
@@ -248,10 +248,6 @@ function espLibrary.addEsp(player)
         boxFill = create("Square", {
             Thickness = 1,
             Filled = true,
-        }),
-        boxOutline = create("Square", {
-            Thickness = 3,
-            Color = color3New()
         }),
         box = create("Square", {
             Thickness = 1
@@ -467,11 +463,6 @@ function espLibrary:Load(renderValue)
                 objects.box.Transparency = self.options.boxesTransparency;
                 objects.box.Size = size;
                 objects.box.Position = position;
-
-                objects.boxOutline.Visible = show and self.options.boxes;
-                objects.boxOutline.Transparency = self.options.boxesTransparency;
-                objects.boxOutline.Size = size;
-                objects.boxOutline.Position = position;
 
                 objects.boxFill.Visible = show and self.options.boxFill;
                 objects.boxFill.Color = color or self.options.boxFillColor;
